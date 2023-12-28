@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="../static/css/main.css">
+<script src="https://kit.fontawesome.com/33cbf8cef6.js" crossorigin="anonymous"></script>
+
+<title>Car Inventory System</title>
+</head>
+<body>
+    <nav class="container-fluid navbar navbar-expand-lg navbar-dark pt-0 fixed-top" style="background-color: black;">
+        <div class="container p-0 ms-5">
+            <a href="{{ url_for('site.home') }}" class="navbar-brand px-5 py-0">Car Inventory System</a>
+            <button 
+                class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navmenu"
+            ><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav p-0 pt-3 ms-auto">
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <p class="navbar-text" style=" color: white;">Welcome {{current_user.email}}!</p>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('site.home') }}" class="nav-link">Search Inventory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Servicing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('site.account') }}" class="nav-link">Account</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid p-0 mt-5 mb-0 mx-0">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
+</body>
+<footer>
+    <section id="about-section">
+        <div id="about-container" class="container-fluid row p-0 m-0 text-lg-start text-md-start text-sm-start text-center" style="background-color: black;">
+            <div id="about-contacts" class="container-fluid col-lg-3 col-md-3 col-sm-3 col-12 p-lg-5 p-md-3 p-1">
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <p style="color: white; text-decoration: none; font-size: calc(1vw + 1vh + 1vmin); font-weight:bold">CONTACT</p>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-map-pin"></i> ANYTOWN,ST 98765 USA</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-envelope"></i> CONTACT@CIS.NET</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-phone"></i> 555-555-5555</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-clock"></i> 5:00AM - 7:00PM</a>
+                    </div>
+                </div>
+            </div>
+            <div id="about-links" class="container-fluid col-lg-3 col-md-3 col-sm-3 col-12 p-lg-5 p-md-3 p-1">
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <p style="color: white; text-decoration: none; font-size: calc(1vw + 1vh + 1vmin); font-weight:bold">LINKS</p>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="{{ url_for('site.home') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">HOME</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SEARCH INVENTORY</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SERVICING</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">ABOUT</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SUPPORT</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="{{ url_for('site.account') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">ACCOUNT</a>
+                    </div>
+                </div>
+            </div>
+            <div id="about-socials" class="container-fluid col-lg-3 col-md-3 col-sm-3 col-12 p-lg-5 p-md-3 p-1">      
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <p style="color: white; text-decoration: none; font-size: calc(1vw + 1vh + 1vmin); font-weight:bold">SOCIALS</p>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style=" text-decoration: none; color: white; font-size: calc(.5vw + .5vh + .5vmin);"><i class="fa-brands fa-facebook"></i>FACEBOOK</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style=" text-decoration: none; color: white; font-size: calc(.5vw + .5vh + .5vmin);"><i class="fa-brands fa-twitter"></i>TWITTER</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-autocol-12">
+                        <a href="#" style=" text-decoration: none; color: white; font-size: calc(.5vw + .5vh + .5vmin);"><i class="fa-brands fa-youtube"></i>YOUTUBE</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style=" text-decoration: none; color: white; font-size: calc(.5vw + .5vh + .5vmin);"><i class="fa-brands fa-instagram"></i> INSTAGRAM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <p class="lead text-center p-5" style="background-color: black; color: rgb(151, 151, 151); text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin);">&copy; 2023 DAKOTA HAYES</p>
+</footer>
+</html>

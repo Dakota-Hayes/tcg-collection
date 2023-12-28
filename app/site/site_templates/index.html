@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %} 
+<section id="banner-section">
+    <div id="banner-container" class="container-fluid p-0 m-0">
+        <div id="banner-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div id="banner-inner-carousel" class="carousel-inner container-fluid p-0 m-0">
+                <div id="carousel-image" class="carousel-item active container-fluid p-0 m-0">
+                    <img class="w-100 p-0" src="..\static\images\cars colored.jpg" alt="cars">
+                </div>
+                <div id="carousel-fade" class="carousel-caption m-0 container-fluid" style="left: 0%; top: 0; bottom: auto; background: linear-gradient(to top, rgba(255,255,255,0) 0%,rgb(0,0,0) 40%)"><br></div>
+                <div id="carousel-fade" class="carousel-caption m-0 container-fluid" style="left: 0%; top: auto; bottom: 0; background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgb(0,0,0) 40%)"><br></div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
