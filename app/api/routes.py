@@ -1,86 +1,94 @@
 from flask import Blueprint, request, jsonify, render_template
 from helpers import token_required
-from models import db, User, Car, car_schema, cars_schema
+from models import db, User, Book, book_schema, books_schema
 
 api = Blueprint('api',__name__, url_prefix='/api')
 
-@api.route('/cars/create', methods = ['POST'])
+@api.route('/books/create', methods = ['POST'])
 @token_required
-def create_car(current_user_token):
-    make = request.json['make']
-    model = request.json['model']
-    year = request.json['year']
-    color = request.json['color']
-    car = Car(make, model, year, color)
-    db.session.add(car)
+def create_book(current_user_token):
+    ISBN = request.json['ISBN']
+    author_name = request.json['author_name']
+    book_title = request.json['book_title']
+    page_count = request.json['page_count']
+    book_type = request.json['book_type']
+    book = Book(ISBN, author_name, book_title, page_count, book_type)
+    db.session.add(book)
     db.session.commit()
-    response = car_schema.dump(car)
+    response = book_schema.dump(book)
     return jsonify(response)
 
-@api.route('/cars/all', methods = ['GET'])
+@api.route('/books/all', methods = ['GET'])
 @token_required
-def get_cars(current_user_token):
-    cars = Car.query.filter_by().all()
-    response = cars_schema.dump(cars)
+def get_books(current_user_token):
+    books = Book.query.filter_by().all()
+    response = books_schema.dump(books)
     return jsonify(response)
 
-@api.route('/cars/make/<car_make>', methods = ['GET'])
+@api.route('/books/ISBN/<book_type>', methods = ['GET'])
 @token_required
-def get_cars_by_make(current_user_token,car_make):
-    cars = Car.query.filter_by(make = car_make).all()
-    response = cars_schema.dump(cars)
+def get_books_by_book_type(current_user_token,book_type):
+    books = Book.query.filter_by(book_type = book_type).all()
+    response = books_schema.dump(books)
     return jsonify(response)
 
-@api.route('/cars/model/<car_model>', methods = ['GET'])
+@api.route('/books/ISBN/<book_ISBN>', methods = ['GET'])
 @token_required
-def get_cars_by_model(current_user_token,car_model):
-    cars = Car.query.filter_by(model = car_model).all()
-    response = cars_schema.dump(cars)
+def get_books_by_ISBN(current_user_token,book_ISBN):
+    books = Book.query.filter_by(ISBN = book_ISBN).all()
+    response = books_schema.dump(books)
     return jsonify(response)
 
-@api.route('/cars/year/<car_year>', methods = ['GET'])
+@api.route('/books/author_name/<book_author_name>', methods = ['GET'])
 @token_required
-def get_cars_by_year(current_user_token,car_year):
-    cars = Car.query.filter_by(year = car_year).all()
-    response = cars_schema.dump(cars)
+def get_books_by_author_name(current_user_token,book_author_name):
+    books = Book.query.filter_by(author_name = book_author_name).all()
+    response = books_schema.dump(books)
     return jsonify(response)
 
-@api.route('/cars/color/<car_color>', methods = ['GET'])
+@api.route('/books/book_title/<book_book_title>', methods = ['GET'])
 @token_required
-def get_cars_by_color(current_user_token,car_color):
-    cars = Car.query.filter_by(color = car_color).all()
-    response = cars_schema.dump(cars)
+def get_books_by_book_title(current_user_token,book_book_title):
+    books = Book.query.filter_by(book_title = book_book_title).all()
+    response = books_schema.dump(books)
     return jsonify(response)
 
-@api.route('/cars/<car_id>', methods = ['GET'])
+@api.route('/books/page_count/<book_page_count>', methods = ['GET'])
 @token_required
-def get_car(current_user_token, car_id):
+def get_books_by_page_count(current_user_token,book_page_count):
+    books = Book.query.filter_by(page_count = book_page_count).all()
+    response = books_schema.dump(books)
+    return jsonify(response)
+
+@api.route('/books/<book_id>', methods = ['GET'])
+@token_required
+def get_book(current_user_token, book_id):
     fan = current_user_token.token
     if fan == current_user_token.token:
-        car = Car.query.get(car_id)
-        response = car_schema.dump(car)
+        book = Book.query.get(book_id)
+        response = book_schema.dump(book)
         return jsonify(response)
     else:
         return jsonify({"message": "Valid Token Required"}),401
 
-@api.route('/cars/<car_id>', methods = ['POST','PUT'])
+@api.route('/books/<book_id>', methods = ['POST','PUT'])
 @token_required
-def update_car(current_user_token,car_id):
-    car = Car.query.get(car_id) 
-    car.make = request.json['make']
-    car.model = request.json['model']
-    car.year = request.json['year']
-    car.color = request.json['color']
+def update_book(current_user_token,book_id):
+    book = Book.query.get(book_id) 
+    book.ISBN = request.json['ISBN']
+    book.author_name = request.json['author_name']
+    book.book_title = request.json['book_title']
+    book.page_count = request.json['page_count']
 
     db.session.commit()
-    response = car_schema.dump(car)
+    response = book_schema.dump(book)
     return jsonify(response)
 
-@api.route('/cars/<car_id>', methods = ['DELETE'])
+@api.route('/books/<book_id>', methods = ['DELETE'])
 @token_required
-def delete_car(current_user_token, car_id):
-    car = Car.query.get(car_id)
-    db.session.delete(car)
+def delete_book(current_user_token, book_id):
+    book = Book.query.get(book_id)
+    db.session.delete(book)
     db.session.commit()
-    response = car_schema.dump(car)
+    response = book_schema.dump(book)
     return jsonify(response)

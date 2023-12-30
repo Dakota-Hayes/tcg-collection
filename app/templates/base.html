@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="../static/css/main.css">
 <script src="https://kit.fontawesome.com/33cbf8cef6.js" crossorigin="anonymous"></script>
 
-<title>Car Inventory System</title>
+<title>Library</title>
 </head>
 <body>
     <nav class="container-fluid navbar navbar-expand-lg navbar-dark pt-0 fixed-top" style="background-color: black;">
         <div class="container p-0 ms-5">
-            <a href="{{ url_for('site.home') }}" class="navbar-brand px-5 py-0">Car Inventory System</a>
+            <a href="{{ url_for('site.home') }}" class="navbar-brand px-5 py-0">Library</a>
             <button 
                 class="navbar-toggler" 
                 type="button" 
@@ -26,23 +26,30 @@
                 <ul class="navbar-nav p-0 pt-3 ms-auto">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <p class="navbar-text" style=" color: white;">Welcome {{current_user.email}}!</p>
+                        <p class="navbar-text" style=" color: white;">WELCOME, {{current_user.email}}!</p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.signout') }}" class="nav-link">SIGN OUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('site.profile') }}" class="nav-link">PROFILE</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.signin') }}" class="nav-link">SIGN IN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.signup') }}" class="nav-link">SIGN UP</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a href="{{ url_for('site.home') }}" class="nav-link">Search Inventory</a>
+                        <a href="#" class="nav-link">SEARCH</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Servicing</a>
+                        <a href="#" class="nav-link">ABOUT</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Support</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url_for('site.account') }}" class="nav-link">Account</a>
+                        <a href="#" class="nav-link">SUPPORT</a>
                     </li>
                 </ul>
             </div>
@@ -67,12 +74,12 @@
                 </div>
                 <div class="container-fluid p-0 m-auto row">
                     <div class="container-fluid p-0 m-auto col-12">
-                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-map-pin"></i> ANYTOWN,ST 98765 USA</a>
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-map-pin"></i> ANYTOWN,LN 12345 USA</a>
                     </div>
                 </div>
                 <div class="container-fluid p-0 m-auto row">
                     <div class="container-fluid p-0 m-auto col-12">
-                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-envelope"></i> CONTACT@CIS.NET</a>
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); "><i class="fa-solid fa-envelope"></i> CONTACT@LIB.ORG</a>
                     </div>
                 </div>
                 <div class="container-fluid p-0 m-auto row">
@@ -97,14 +104,32 @@
                         <a href="{{ url_for('site.home') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">HOME</a>
                     </div>
                 </div>
+                {% if current_user.is_authenticated %}
                 <div class="container-fluid p-0 m-auto row">
                     <div class="container-fluid p-0 m-auto col-12">
-                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SEARCH INVENTORY</a>
+                        <a href="{{ url_for('auth.signout') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SIGN OUT</a>
                     </div>
                 </div>
                 <div class="container-fluid p-0 m-auto row">
                     <div class="container-fluid p-0 m-auto col-12">
-                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SERVICING</a>
+                        <a href="{{ url_for('site.profile') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">PROFILE</a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="{{ url_for('auth.signin') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SIGN IN</a>
+                    </div>
+                </div>
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="{{ url_for('auth.signup') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SIGN UP</a>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="container-fluid p-0 m-auto row">
+                    <div class="container-fluid p-0 m-auto col-12">
+                        <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SEARCH</a>
                     </div>
                 </div>
                 <div class="container-fluid p-0 m-auto row">
@@ -115,11 +140,6 @@
                 <div class="container-fluid p-0 m-auto row">
                     <div class="container-fluid p-0 m-auto col-12">
                         <a href="#" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">SUPPORT</a>
-                    </div>
-                </div>
-                <div class="container-fluid p-0 m-auto row">
-                    <div class="container-fluid p-0 m-auto col-12">
-                        <a href="{{ url_for('site.account') }}" style="color: white; text-decoration: none; font-size: calc(.5vw + .5vh + .5vmin); ">ACCOUNT</a>
                     </div>
                 </div>
             </div>

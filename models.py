@@ -48,42 +48,47 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'User {self.email} has been added to the database'
 
-class Car(db.Model):
+class Book(db.Model):
     id = db.Column(db.String, primary_key=True)
-    make = db.Column(db.String(150), nullable=True, default='')
-    model = db.Column(db.String(150), nullable = True, default = '')
-    year = db.Column(db.Integer, nullable = True, default = 0000)
-    color = db.Column(db.String(150), nullable = True, default = '')
+    author_name = db.Column(db.String(150), nullable=True, default='')
+    book_title = db.Column(db.String(150), nullable = True, default = '')
+    book_type = db.Column(db.String(150), nullable = True, default = '')
+    ISBN = db.Column(db.Integer, nullable = True, default = 0)
+    page_count = db.Column(db.Integer, nullable = True, default = 0)
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
-    def __init__(self, make, model='', year=0000, color=''):
+    def __init__(self, ISBN=0, author_name = '', book_title='',page_count=0, book_type=''):
         self.id = self.set_id()
-        self.make = make
-        self.model = model
-        self.year = year
-        self.color = color
+        self.author_name = author_name
+        self.book_title = book_title
+        self.book_type = book_type
+        self.ISBN = ISBN
+        self.page_count = page_count
 
     def set_id(self):
         return str(uuid.uuid4())
     
-    def set_make(self, make):
-        self.make = make
+    def set_author_name(self, author_name):
+        self.author_name = author_name
 
-    def set_model(self, model):
-        self.model = model
+    def set_book_title(self, book_title):
+        self.book_title = book_title
 
-    def set_year(self, year):
-        self.year = year
+    def set_book_type(self, book_type):
+        self.book_type
     
-    def set_color(self, color):
-        self.color = color
+    def set_ISBN(self, ISBN):
+        self.ISBN = ISBN
+
+    def set_page_count(self, page_count):
+        self.page_count = page_count
 
     def __repr__(self):
-        return f'Car {self.year} {self.model} {self.make} has been added to the database'
+        return f'Book {self.author_name} {self.book_title} {self.book_type} {self.ISBN} {self.page_count} has been added to the database'
 
-class CarSchema(ma.Schema):
+class BookSchema(ma.Schema):
     class Meta:
-        fields = ['id', 'make','model','year', 'color']
+        fields = ['id', 'ISBN', 'author_name','book_title','page_count','book_type']
 
-car_schema = CarSchema()
-cars_schema = CarSchema(many=True)
+book_schema = BookSchema()
+books_schema = BookSchema(many=True)
